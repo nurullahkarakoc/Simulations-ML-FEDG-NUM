@@ -1,0 +1,40 @@
+
+\documentclass{standalone}
+\standaloneconfig{border=1pt}
+ \usepackage{pgfplots}       % <-- required in preamble
+ \usetikzlibrary{intersections}
+ \usepackage{SIunits}        % <-- required in preamble
+ \usepackage{bm}
+ \pgfplotsset{compat=newest} % <-- optional in preamble
+\begin{document}
+\begin{tikzpicture}
+\begin{semilogyaxis}[%
+%		axis lines*=none,
+xlabel={iteration $k$ },
+ylabel= {Normalized error, $e_{\bm{X}}$},
+%	xmin = 8,
+%	xmax = 19,
+%		ymin=0,
+%	ymode=log,
+%	ymax=1,
+grid = dashed,both, %width=7cm,height=3.5cm,%major, minor, both
+enlargelimits = false,
+minor tick num=1, %number of minor ticks (can also specify minor {x,y,z} tick num individual)
+legend columns=4,
+legend style={at={(1,1)},anchor=south,fill=none,draw=none},
+%cycle list name=mlineplot cycle,
+]
+
+%\addplot+[name path=pred,mark size=0.25,fill=none,line width=1,color=red,mark options={fill=darkgray}]
+%table[col sep=comma,x={vi},y ={eb}] {error_plot.csv};
+%\addlegendentry{$R_{\tilde{p}}$}
+\addplot+[fill=none,mark=none,line width=1]
+table[col sep=comma,x={t},y={err}] {diff1.csv};
+\addlegendentry{$e_{\bm{A}}$}
+\addplot+[fill=none,mark=none]
+table[col sep=comma,x={t},y={therr}] {diff1.csv};
+\addlegendentry{$e_{\bm{B}}$}
+\end{semilogyaxis}
+\end{tikzpicture}
+\end{document}
+
